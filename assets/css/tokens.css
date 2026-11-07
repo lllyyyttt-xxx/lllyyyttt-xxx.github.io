@@ -1,0 +1,80 @@
+/* =============================================================================
+   设计变量层 —— 换肤只改这一个文件
+   规则：base.css / site.css 里不允许出现十六进制色值，一律引用这里的变量。
+   ============================================================================= */
+
+:root {
+  /* ---------- 品牌色：呼应应用图标的紫 ---------- */
+  --brand-50:  #F5F2FE;
+  --brand-100: #EBE4FC;
+  --brand-200: #D8CBF8;
+  --brand-300: #B9A4EE;
+  --brand-500: #7C5CD6;
+  --brand-600: #6A45C9;
+  --brand-700: #55339F;
+  --brand-ink: #3C2A6B;
+  /* 落在品牌色上的文字。单独拎出来是因为换深色皮肤时它会跟着变，
+     写死 #fff 的地方到时候会变成白底白字。 */
+  --on-brand: #FFFFFF;
+
+  /* ---------- 中性 ---------- */
+  --bg:        #FFFFFF;
+  --bg-soft:   #F7F7FA;
+  --bg-tint:   #FBFAFE;
+  --surface:   #FFFFFF;
+  --line:        #E8E6EF;
+  --line-strong: #D8D5E2;
+  --ink:    #17161C;
+  --ink-2:  #494654;
+  --ink-3:  #6F6B7C;
+
+  /* ---------- 语义 ---------- */
+  --ok:   #1F8A5B;
+  --warn: #B4690E;
+  --warn-bg: #FFF8E8;
+
+  /* ---------- 字体：系统栈，零下载 ---------- */
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+               "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
+  --font-mono: ui-monospace, "SF Mono", "Cascadia Mono", Consolas, monospace;
+
+  /* ---------- 字号阶梯 ---------- */
+  /* 首屏标题要正好在「课表、账单、单词、待办，」后断行：
+     12 个全角字符 ≈ 12em，左栏在 1080 视口下约 486px，所以上限卡在 2.5rem。 */
+  --fs-display: clamp(1.9rem, 3.4vw, 2.5rem);
+  --fs-h2:      clamp(1.625rem, 2.8vw, 2.25rem);
+  --fs-h3:      1.25rem;
+  --fs-lead:    clamp(1.0625rem, 1.3vw, 1.1875rem);
+  --fs-body:    1rem;
+  --fs-sm:      0.875rem;
+  --fs-xs:      0.8125rem;
+  --fs-num:     1.75rem;
+
+  /* ---------- 间距：8 基准 ---------- */
+  --sp-1: 4px;  --sp-2: 8px;  --sp-3: 12px; --sp-4: 16px;
+  --sp-5: 24px; --sp-6: 32px; --sp-7: 48px; --sp-8: 64px; --sp-9: 96px;
+  --section-y: clamp(64px, 7.5vw, 112px);
+  --gutter:    clamp(20px, 4vw, 40px);
+
+  /* ---------- 圆角 ---------- */
+  --r-sm: 8px; --r-md: 12px; --r-lg: 18px; --r-xl: 28px; --r-pill: 999px;
+
+  /* ---------- 阴影：浅色下克制，靠 1px 描边撑结构 ---------- */
+  --shadow-1: 0 1px 2px rgba(23, 22, 28, .06), 0 4px 12px rgba(23, 22, 28, .045);
+  --shadow-2: 0 2px 6px rgba(23, 22, 28, .05), 0 16px 40px rgba(23, 22, 28, .09);
+  --shadow-brand: 0 8px 20px rgba(124, 92, 214, .26);
+
+  /* ---------- 布局 ---------- */
+  --maxw: 1080px;
+  --maxw-prose: 680px;
+  --nav-h: 64px;
+
+  /* ---------- 动效 ---------- */
+  --dur-fast: 160ms;
+  --dur: 240ms;
+  --ease: cubic-bezier(.2, .7, .3, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root { --dur: 1ms; --dur-fast: 1ms; }
+}

@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>工作台 · 课表、账单、单词、待办，收在一个窗口里</title>
+<meta name="description" content="工作台是一个 Windows 桌面程序，配一个手机网页。英语、记账、随机挑战、时间管理、随手记五个模块，39 个 AI 工具能直接读写你的数据，数据默认只存在本机。MIT 开源。">
+<meta name="theme-color" content="#7C5CD6">
+<link rel="icon" href="assets/img/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/site.css">
+<meta property="og:type" content="website">
+<meta property="og:title" content="工作台 · 课表、账单、单词、待办，收在一个窗口里">
+<meta property="og:description" content="Windows 桌面端 + 手机网页，五个模块，39 个 AI 工具，数据默认只存本机。">
+<!-- 分享相关：图必须写成绝对地址（爬虫不跑 JS）。GitHub Pages 无需分享码 -->
+<meta property="og:image" content="https://lllyyyttt-xxx.github.io/assets/img/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://lllyyyttt-xxx.github.io/">
+<script>document.documentElement.className += ' js';</script>
+</head>
+<body>
+
+<a class="skip-link" href="#main">跳到主要内容</a>
+
+<!-- ============ S0 导航 ============ -->
+<header class="nav">
+  <div class="container nav__inner">
+    <a class="brand" href="#top" aria-label="工作台首页">
+      <img src="assets/img/mark.svg" alt="" width="28" height="28">
+      <span>工作台 <small>WORKBENCH</small></span>
+    </a>
+
+    <nav class="nav__links" aria-label="页面导航">
+      <a href="#features">功能</a>
+      <a href="#english">英语</a>
+      <a href="#ai">AI</a>
+      <a href="#sync">同步</a>
+      <a href="#download">下载</a>
+    </nav>
+
+    <div class="nav__actions">
+      <a class="nav__gh" href="#" data-fill="repo">GitHub</a>
+      <a class="btn btn--primary btn--sm" href="#download" data-label>下载 Windows 版</a>
+      <button class="nav__toggle" type="button" aria-label="打开菜单" aria-expanded="false" aria-controls="drawer"><span></span></button>
+    </div>
+  </div>
+</header>
+
+<div class="drawer" id="drawer" hidden>
+  <a href="#features">功能</a>
+  <a href="#english">英语</a>
+  <a href="#life">生活</a>
+  <a href="#ai">AI 助手</a>
+  <a href="#sync">手机与同步</a>
+  <a href="#download">下载</a>
+  <a href="#" data-fill="repo">GitHub</a>
+  <a class="btn btn--primary btn--wide" href="#download">下载 Windows 版</a>
+</div>
+
+<main id="main">
+
+<!-- ============ S1 Hero ============ -->
+<section class="hero" id="top">
+  <div class="container hero__grid">
+    <div class="hero__text" data-reveal>
+      <p class="eyebrow">Windows 便携版 · 免安装</p>
+      <h1>课表、账单、<br class="br-narrow">单词、待办，<br class="br-narrow">收在一个窗口里</h1>
+      <p class="hero__sub">桌面端和手机端都是五个模块。数据默认只存在你自己的电脑上，不注册也能用。</p>
+
+      <div class="hero__cta">
+        <a class="btn btn--primary" id="dl-desktop" data-dl href="#download" data-label>下载 Windows 版</a>
+        <a class="btn btn--ghost" href="https://workbench-prod-8207.netlify.app" data-fill="mobile" target="_blank" rel="noopener">在手机上打开</a>
+      </div>
+      <p class="hero__cta-note"><span data-fill="size">—</span> · 免安装，解压即用，不写注册表</p>
+
+      <div class="hero__meta">
+        <span data-fill="version">v1.0.0</span>
+        <span data-fill="system">Windows 10 / 11（64 位）</span>
+        <span>MIT 开源</span>
+      </div>
+    </div>
+
+    <div class="hero__visual" data-reveal style="--i:1">
+      <div class="hero__switch" role="tablist" aria-label="切换设备截图">
+        <button type="button" role="tab" data-panel="desktop" aria-selected="true">桌面端</button>
+        <button type="button" role="tab" data-panel="mobile" aria-selected="false" tabindex="-1">手机端</button>
+      </div>
+
+      <div class="hero__panel" data-panel="desktop">
+        <div class="window">
+          <div class="window__bar" aria-hidden="true">
+            <i></i><i></i><i></i>
+            <span class="window__title">工作台</span>
+          </div>
+          <img src="assets/img/hero-desktop.webp" width="1440" height="1040" fetchpriority="high" decoding="async"
+               alt="工作台桌面端首页：顶部是今天四格，中间是助手输入框，下方是五张模块卡片的环形轮播">
+        </div>
+      </div>
+
+      <div class="hero__panel" data-panel="mobile" hidden>
+        <div class="phone">
+          <img src="assets/img/hero-mobile.webp" width="780" height="1688" loading="lazy" decoding="async"
+               alt="工作台手机端首页：顶部概览、中间一张模块卡片，底部是导航图标">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ S2 数字条 ============ -->
+<section class="stats" aria-label="项目规模">
+  <div class="container stats__grid">
+    <div class="stat" data-reveal><b>6,662</b><span>四六级单词</span></div>
+    <div class="stat" data-reveal style="--i:1"><b>158</b><span>篇真题阅读</span></div>
+    <div class="stat" data-reveal style="--i:2"><b>39</b><span>个 AI 工具</span></div>
+    <div class="stat" data-reveal style="--i:3"><b>5</b><span>个模块</span></div>
+  </div>
+</section>
+
+<!-- ============ S3 模块总览 ============ -->
+<section class="section" id="features">
+  <div class="container">
+    <div class="section-head" data-reveal>
+      <h2>五个模块，每个都能单独用</h2>
+      <p class="lead">不喜欢的模块可以不用，左侧图标栏点一下就进去。<br class="br-wide">电脑和手机打开是同一份数据，换设备接着用。</p>
+    </div>
+
+    <div class="feature-grid">
+      <article class="feature" data-reveal>
+        <div class="feature__top">
+          <span class="feature__icon" style="background:#00897b" aria-hidden="true">英</span>
+          <h3>英语工作台</h3>
+        </div>
+        <p class="feature__desc">6662 个词、158 篇真题、卡片背词</p>
+        <ul>
+          <li>每个词都标着「真题出现 N 处」和考过的套次</li>
+          <li>背词按间隔排复习，认得的越隔越久，不认得的回头再来</li>
+          <li>单词本按全部、四级、六级、顽固词筛选，能导出导入</li>
+        </ul>
+      </article>
+
+      <article class="feature" data-reveal style="--i:1">
+        <div class="feature__top">
+          <span class="feature__icon" style="background:#e57373" aria-hidden="true">生</span>
+          <h3>生活</h3>
+        </div>
+        <p class="feature__desc">记账、待办、倒计时</p>
+        <ul>
+          <li>备忘录粘进来就能变账本：<code>2 号 3.8+1.5+15.6=20.9</code> 自动拆成三笔</li>
+          <li>记完自动算今天、本月和日均，柱状图饼图是页面自己画的</li>
+          <li>待办带截止日期，倒计时能按周、按月、按年重复</li>
+        </ul>
+      </article>
+
+      <article class="feature" data-reveal style="--i:2">
+        <div class="feature__top">
+          <span class="feature__icon" style="background:#6b81a8" aria-hidden="true">挑</span>
+          <h3>随机挑战</h3>
+        </div>
+        <p class="feature__desc">抽到就必须做</p>
+        <ul>
+          <li>一分钟 / 十分钟 / 一小时 / 一整天四档，33 条内置题池</li>
+          <li>同题 3 天不重复，同档累计完成 5 次升档</li>
+          <li>完成或放弃都记一笔，完成率和连续天数在顶上</li>
+        </ul>
+      </article>
+
+      <article class="feature" data-reveal style="--i:3">
+        <div class="feature__top">
+          <span class="feature__icon" style="background:#4a6fa5" aria-hidden="true">时</span>
+          <h3>时间管理</h3>
+        </div>
+        <p class="feature__desc">课表、规划、时间记录、番茄钟</p>
+        <ul>
+          <li>课表支持单双周、连堂课跨格、下一节课提示</li>
+          <li>番茄钟关掉页面还能接着走，结束自动记进时间记录</li>
+          <li>统计算的是扣掉课表以后，这周还剩多少可支配时间</li>
+        </ul>
+      </article>
+
+      <article class="feature" data-reveal style="--i:4">
+        <div class="feature__top">
+          <span class="feature__icon" style="background:#5c8a5d" aria-hidden="true">记</span>
+          <h3>随手记</h3>
+        </div>
+        <p class="feature__desc">灵感和情绪，记一笔就走</p>
+        <ul>
+          <li>灵感不用起标题，回车就存，能打四种标记</li>
+          <li>收件箱按天排，内容和标记都能搜</li>
+          <li>每天给情绪和精力各打一分，三十天曲线看得出规律</li>
+        </ul>
+      </article>
+    </div>
+
+    <p class="features__note">五个模块各存各的，清空一个不会动到别的。</p>
+  </div>
+</section>
+
+<!-- ============ S4 英语深挖 ============ -->
+<section class="section section--soft" id="english">
+  <div class="container">
+    <div class="deep">
+      <div class="deep__text" data-reveal>
+        <h2>每个词都带着<br>它在真题里的出处</h2>
+        <p class="deep__sub">进去是四个页签：查词、背词、单词本、读文章。四个共用同一份词库——四级 4544 个、六级 2118 个，每个词都标着在 158 篇真题里出现过几次。</p>
+        <ul class="mod-list">
+          <li><b>查词</b><span>输入一个词，右边出音标、词性、释义和词频；往下是真题原句，标着出自哪一年哪一套。左边是每日推荐词，顶上还有一句每日名言。</span></li>
+          <li><b>背词</b><span>一轮 20 个：先补反复答错的，再补今天该复习的，最后用没背过的新词凑满。卡片正面是词，点一下翻释义和例句。</span></li>
+          <li><b>复习</b><span>点「认识」，下次间隔往后推一档（1、2、4、7、15、30、60、120 天）；点「不认识」就从第一档重来。答错三次还没背熟的，进「顽固词」。</span></li>
+          <li><b>单词本</b><span>全部 / 四级 / 六级 / 顽固词四种筛法；能导出成一份文件带走，换台机器导入就接上。</span></li>
+          <li><b>读文章</b><span>158 篇真题原文，里面的四六级词自动点亮，点一下看释义；读完一键把本篇生词收进单词本。</span></li>
+        </ul>
+        <p class="deep__foot">词库和真题不随开源仓库分发，仓库里只有 3 条示例数据。</p>
+      </div>
+      <div class="deep__visual" data-reveal style="--i:1">
+        <div class="shot">
+          <img src="assets/img/shot-english.webp" width="1200" height="900" loading="lazy" decoding="async"
+               alt="英语工作台的查词页：左边是每日推荐和单词列表，右边是 technology 的音标、释义、真题用法，下面列出三条带出处的真题原句，词被高亮">
+        </div>
+        <p class="shot__cap">英语 · 查词：右边是释义、词频，和它在真题里的原句。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ S5 生活 ============ -->
+<section class="section" id="life">
+  <div class="container">
+    <div class="deep deep--flip">
+      <div class="deep__text" data-reveal>
+        <h2>备忘录里的账，<br class="br-wide">直接粘进来</h2>
+        <p class="deep__sub">四个页签：今天看总览，记账管钱，待办管要做的事，倒计时盯着还剩几天。数据是同一份，在哪一页记都一样。</p>
+        <ul class="mod-list">
+          <li><b>今天</b><span>四格：今天花了多少、本月累计和日均、今天几件待办、最近一个倒计时；下面直接列今天要做的事，就地打勾。</span></li>
+          <li><b>记账</b><span>金额、类型、备注、日期，四栏记一笔；账目按月切、按天折叠，一天几笔、这天一共多少都在行尾。</span></li>
+          <li><b>导入</b><span>把备忘录里的账整段粘进来，或者选一份 txt / PDF 上传。先告诉你识别出几天、几笔、合计多少，对不上的行会单独标出来，确认了才写进账本。</span></li>
+          <li><b>分析</b><span>本月每天的花销画成柱状图，各类型占比画成饼图，顶上写着共几笔、合计多少、哪天花得最多。图是页面自己画的，不加载图表库。</span></li>
+          <li><b>待办</b><span>带截止日期，过期和今天到期会标出来，做完打勾自动沉到下面；倒计时支持一次性、每周、每月、每年。</span></li>
+        </ul>
+      </div>
+      <div class="deep__visual" data-reveal style="--i:1">
+        <div class="shot">
+          <img src="assets/img/shot-ledger.webp" width="1200" height="680" loading="lazy" decoding="async"
+               alt="生活模块的记账分析页：上面是本月每日花销柱状图，下面各类型占比的饼图，图例写着吃饭 92.5 元占 85%">
+        </div>
+        <p class="shot__cap">生活 · 分析：上面按天看花销，下面按类型看占比。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ S6 时间 ============ -->
+<section class="section section--soft" id="time">
+  <div class="container">
+    <div class="deep">
+      <div class="deep__text" data-reveal>
+        <h2>这周的时间花在哪，<br>看图表比看感觉准</h2>
+        <p class="deep__sub">页签：课表、规划、时间、统计，桌面版多一个专注。课表是骨架，记录往里填，统计告诉你这周还剩多少小时真是自己能支配的。</p>
+        <ul class="mod-list">
+          <li><b>课表</b><span>按单双周排，连堂课跨两格显示；下一节课是哪门、在哪间教室、还有多久，页面顶上就写着。</span></li>
+          <li><b>规划</b><span>一条规划能拆成几步，每步填个时间；跟课表撞了的会标一句，只是提醒，不拦着你加。</span></li>
+          <li><b>时间</b><span>记一段「几点到几点、做了什么」，按分类累计；今天每类占多少，下面一条横条就看出来。</span></li>
+          <li><b>专注</b><span>桌面版有番茄钟：15 / 25 / 45 / 60 分钟，三种背景音，可全屏；关掉页面回来接着走，下一节有课提前二十分钟提醒。</span></li>
+          <li><b>统计</b><span>本周几节课、记了多少、扣掉课还剩多少小时可支配；课表排的和实际记的对不上，会单独列出来。</span></li>
+        </ul>
+      </div>
+      <div class="deep__visual" data-reveal style="--i:1">
+        <div class="shot">
+          <img src="assets/img/shot-timetable.webp" width="1200" height="900" loading="lazy" decoding="async"
+               alt="时间管理的课表页：顶上是下一节课卡片，下面周一到周日七列，连堂课占两格，本周标着「双周」">
+        </div>
+        <p class="shot__cap">时间 · 课表：周一到周日，连堂课占两格，顶上那张卡写着下一节课。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ S7 随机挑战 ============ -->
+<section class="section" id="challenge">
+  <div class="container">
+    <div class="section-head" data-reveal>
+      <h2>抽到就得做，<br class="br-wide">不做也得记一笔</h2>
+      <p class="lead">四个时长档，从「一分钟」到「一整天」。<br class="br-wide">抽到哪道就做哪道；完成或放弃都记一笔，顶上就是完成率和连续几天。</p>
+    </div>
+
+    <div class="shot band__shot" data-reveal>
+      <img src="assets/img/shot-challenge.webp" width="1200" height="540" loading="lazy" decoding="async"
+           alt="随机挑战页：上面一排是抽了 6 次、完成 5 次、完成率 83%、连续 3 天的统计，下面是一道「一小时」档的挑战，配着完成、放弃、再抽一个三个按钮">
+    </div>
+    <p class="shot__cap">随机挑战：顶上四个数字，下面就是手上这道题。</p>
+
+    <ul class="deep__list band__list" data-reveal>
+      <li>一分钟 8 道、十分钟 9 道、一小时 9 道、一整天 7 道，共 33 道</li>
+      <li>每档点一下就抽，同一道题 3 天内不会再出现</li>
+      <li>做完点「完成」，做不了点「放弃」，都不用交证明；顶上四个数字就是抽了几次、完成率、连着几天</li>
+      <li>同一档累计完成 5 次升一级，到「一整天」封顶</li>
+      <li>某一档能抽的都抽过了，会放宽「三天不重复」，不会让你没得抽</li>
+      <li>题池能自己加，加的时候写一条完成标准，做完自己对照</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ S8 随手记 ============ -->
+<section class="section section--soft" id="notes">
+  <div class="container">
+    <div class="deep">
+      <div class="deep__text" data-reveal>
+        <h2>想到什么写一句，<br class="br-wide">不用起标题</h2>
+        <p class="deep__sub">两个页签：灵感和情绪精力。一个收碎片，一个记状态，都是几秒钟的事，不用挑分类、不用想格式。</p>
+        <ul class="mod-list">
+          <li><b>灵感</b><span>光标放进框里直接写，回车就存；不用起标题、不用选分类，最多顺手打个「想法 / 待办 / 要查 / 想买」的标记。</span></li>
+          <li><b>找旧的</b><span>收件箱按天往下排：今天、昨天、几月几号；上面一个搜索框，按内容或标记都能搜。</span></li>
+          <li><b>情绪</b><span>每天两个滑块，情绪和精力各打 1–5 分，点一下就存下今天。</span></li>
+          <li><b>回看</b><span>最近三十天画成双色柱状图；再按星期几算平均分，一周里哪天状态最好，一眼能看到。</span></li>
+        </ul>
+      </div>
+      <div class="deep__visual" data-reveal style="--i:1">
+        <div class="shot">
+          <img src="assets/img/shot-notes.webp" width="1200" height="760" loading="lazy" decoding="async"
+               alt="随手记的灵感页：顶部是输入框和「想法、待办、要查、想买」四个标记，下面是按天排列的六条笔记和搜索框">
+        </div>
+        <p class="shot__cap">随手记 · 灵感：写一句就存，标记可以之后再补。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ S9 AI ============ -->
+<section class="section" id="ai">
+  <div class="container">
+    <div class="deep deep--flip">
+      <div class="deep__text" data-reveal>
+        <h2>39 个工具，<br class="br-wide">能真的改你的数据</h2>
+        <p class="deep__sub">说「明天 3-4 节加一门课」，它直接写进课表；问「这个月花了多少」，它自己去翻账本。写操作先弹一条确认，你点确认才落盘。</p>
+
+        <div class="ai-grid">
+          <div class="ai-item"><b>查课表 / 加课</b><span>「明天 3-4 节加门课」直接写进课表</span></div>
+          <div class="ai-item"><b>记账 / 查花费</b><span>「午饭 18」记下；「这月花了多少」自己算</span></div>
+          <div class="ai-item"><b>加待办 / 建倒计时</b><span>带上截止日期和重复方式</span></div>
+          <div class="ai-item"><b>查词 / 周复盘</b><span>四六级词义、真题出处，这周学了多久</span></div>
+        </div>
+
+        <div class="chips" aria-label="示例问句，点击可复制">
+          <button type="button">今天有课吗</button>
+          <button type="button">这个月花了多少</button>
+          <button type="button">这周学了多久</button>
+          <button type="button">把 abandon 加进单词本</button>
+        </div>
+
+        <p class="ai-note">最多连续 4 轮工具调用 · 支持联网搜索 · 后台连不上时退回本地快答</p>
+
+        <p class="ai-fineprint"><b>不用填 API Key。</b>网页版和桌面版默认走站点自己的后台转发，密钥在服务器上，网页源码里看不到。想换成自己的模型，在「设置 → 助手设置」里填接口地址、密钥和模型名，只存在这台机器。</p>
+        <p class="ai-fineprint"><b>在线体验里为什么没有 AI。</b>那份额度是作者自己掏钱买的，挂在公开页面上会被刷。装到自己机器上，连的是你自己的后台或你自己的 key。</p>
+      </div>
+      <div class="deep__visual" data-reveal style="--i:1">
+        <div class="toolbox">
+          <div class="toolbox__head">
+            <b>39 个工具，分 15 组</b>
+            <span>写操作都要你点头</span>
+          </div>
+          <ul class="toolbox__list">
+            <li><span>课表</span><b>6</b></li>
+            <li><span>时间</span><b>5</b></li>
+            <li><span>行程</span><b>5</b></li>
+            <li><span>待办</span><b>5</b></li>
+            <li><span>记忆</span><b>3</b></li>
+            <li><span>随手记</span><b>3</b></li>
+            <li><span>花销</span><b>2</b></li>
+            <li><span>倒计时</span><b>2</b></li>
+            <li><span>挑战</span><b>2</b></li>
+            <li><span>今天</span><b>1</b></li>
+            <li><span>搜索</span><b>1</b></li>
+            <li><span>英语</span><b>1</b></li>
+            <li><span>复盘</span><b>1</b></li>
+            <li><span>导入</span><b>1</b></li>
+            <li><span>系统</span><b>1</b></li>
+          </ul>
+          <p class="toolbox__note">改数据先弹一条确认，改完还能撤销；最多连续调用 4 轮，不会自己乱跑。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ S10 同步 ============ -->
+<section class="section section--soft" id="sync">
+  <div class="container sync">
+    <div data-reveal>
+      <h2>名字加 4 位数字，<br>两台设备就通了</h2>
+      <p class="deep__sub">不建账号、不收邮箱。手机和电脑填同一组名字和访问码，看到的就是同一份数据——手机上刚记的一笔账，电脑打开也在。</p>
+
+      <ol class="steps">
+        <li><b>改动先写本机</b>：桌面写进 <code>%APPDATA%</code> 里的 json，网页写进浏览器本地存储。不同步，数据就不出这台设备。</li>
+        <li><b>两台设备填同一组「名字 + 4 位数字」</b>：在「设置 → 数据同步」里。没有邮箱，也没有密码找回。</li>
+        <li><b>每个整点自动对一次</b>：只传改过的模块，没动的不发请求；一边改过就直接同步，<b>两边都改过会弹一条让你选</b>。</li>
+        <li><b>「立即下载」才盖本地</b>：点之前先确认一次；手机上先记的会先落本地，断网、切页面都不丢。</li>
+      </ol>
+
+      <p class="ai-note">手机端不是 App，是网页。浏览器打开，五个模块都在，不用装、不占存储。</p>
+    </div>
+
+    <div class="deep__visual" data-reveal style="--i:1">
+      <div class="phone">
+        <img src="assets/img/shot-mobile-life.webp" width="780" height="1688" loading="lazy" decoding="async"
+             alt="手机端生活模块的记账页：上面是记一笔表单，下面是按月分组的账目，每行写着当天几笔和合计">
+      </div>
+      <p class="shot__cap">手机端 · 记账：手机上记的这笔，电脑上打开也在。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ S11 下载 ============ -->
+<section class="section" id="download">
+  <div class="container">
+    <div class="section-head" data-reveal>
+      <h2>下载</h2>
+      <p class="lead">下载一个压缩包，解压就能用。<br class="br-wide">不写注册表、不进开始菜单——除非你自己打开开机自启。</p>
+    </div>
+
+    <div class="dl-grid">
+      <div class="dl-card dl-card--main" data-reveal>
+        <div class="dl-card__head">
+          <h3>桌面版</h3>
+          <span class="dl-card__ver" data-fill="version">v1.0.0</span>
+        </div>
+
+        <a class="btn btn--primary btn--wide" id="dl-desktop-2" data-dl href="#download" data-label>下载 .zip</a>
+        <p class="dl-pending" id="dl-pending">Release 还没发布。发布后这里会自动变成下载链接；想先看源码可以去 GitHub。</p>
+
+        <dl class="dl-list">
+          <div><dt>文件大小</dt><dd data-fill="size">—</dd></div>
+          <div><dt>系统</dt><dd data-fill="system">Windows 10 / 11（64 位）</dd></div>
+          <div><dt>安装</dt><dd>免安装，解压即用</dd></div>
+          <div><dt>数据位置</dt><dd data-fill="datadir">%APPDATA%\工作台\</dd></div>
+          <div><dt>卸载</dt><dd>删掉解压目录和数据文件夹</dd></div>
+          <div id="dl-sha"><dt>SHA256</dt><dd><button type="button" id="dl-sha-value" data-copy>—</button></dd></div>
+        </dl>
+
+        <p class="dl-note">解压后双击里面的「工作台.exe」。首次运行 Windows 可能提示「未知发布者」，点「更多信息 → 仍要运行」——没有做代码签名。</p>
+
+        <div class="dl-actions">
+          <a class="btn btn--ghost btn--sm" href="#" data-fill="repo">查看源码</a>
+          <a class="btn btn--ghost btn--sm" href="#" data-fill="issues">反馈问题</a>
+        </div>
+      </div>
+
+      <div class="dl-card" data-reveal style="--i:1">
+        <div class="dl-card__head">
+          <h3>手机版</h3>
+          <span class="dl-card__ver">浏览器打开</span>
+        </div>
+
+        <a class="btn btn--ghost btn--wide" href="https://workbench-prod-8207.netlify.app" data-fill="mobile" target="_blank" rel="noopener">在手机上打开</a>
+
+        <dl class="dl-list">
+          <div><dt>形态</dt><dd>纯网页，不是 PWA</dd></div>
+          <div><dt>安装</dt><dd>不用装</dd></div>
+          <div><dt>模块</dt><dd>五个，与桌面一致</dd></div>
+          <div><dt>数据</dt><dd>存浏览器本地</dd></div>
+          <div><dt>浏览器</dt><dd>Chrome / Edge / Safari</dd></div>
+          <div><dt>更新</dt><dd>刷新就是最新版</dd></div>
+        </dl>
+
+        <code class="dl-url" data-fill="mobile-url">https://workbench-prod-8207.netlify.app</code>
+
+        <p class="dl-note">用手机浏览器打开上面的地址就行。想放到桌面，用浏览器的「添加到主屏幕」，它本质上还是个网页。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ S12 FAQ ============ -->
+<section class="section section--soft" id="faq">
+  <div class="container">
+    <div class="section-head" data-reveal>
+      <h2>常见问题</h2>
+    </div>
+
+    <div class="faq" data-reveal>
+      <details>
+        <summary>要联网吗？</summary>
+        <p>背单词、记账、课表、番茄钟、时间记录、随手记都不联网。只有三件事会用网：AI 助手、手机电脑同步、以及查同义词（请求公开词典接口 datamuse）。</p>
+      </details>
+
+      <details>
+        <summary>需要注册登录吗？</summary>
+        <p>不需要。默认就在本机用，数据只写本地。想两台设备互通，才去「设置 → 数据同步」填一个名字加 4 位数字访问码——那不是注册账号，没有邮箱，也没有密码找回。</p>
+      </details>
+
+      <details>
+        <summary>电脑和手机的数据是同一份吗？</summary>
+        <p>不开同步就是两份，各存各的。开了同步才按模块互通，而且不是谁覆盖谁：只有一边改过就直接同步，两边都改过会弹出来让你选。</p>
+      </details>
+
+      <details>
+        <summary>只用网页版够用吗？</summary>
+        <p>记账、看课表、随手记、查单词都够用。差别在 AI：桌面版 39 个工具，能改能删；网页版 14 个，只能查和新增。改课、删账、勾掉待办这些得用桌面版。</p>
+      </details>
+
+      <details>
+        <summary>数据存在哪？会被上传吗？</summary>
+        <p>桌面端存在 <code>%APPDATA%\工作台\workbench-data.json</code>，手机端存在浏览器本地存储。不点同步、不登录，数据就不会离开这台设备。</p>
+        <p>开了同步之后，数据会写到你自己的云端空间，按模块分成不同文件，只传改过的那几个。</p>
+      </details>
+
+      <details>
+        <summary>为什么下载包这么大？</summary>
+        <p>里面打包了 Electron 运行时（Chromium + Node.js），这部分占绝大部分。业务代码和页面只有几 MB。</p>
+      </details>
+
+      <details>
+        <summary>手机端要装 App 吗？</summary>
+        <p>不用。它是一个网页，也不是 PWA。浏览器打开就能用，加到主屏幕只是放了个快捷方式。</p>
+      </details>
+
+      <details>
+        <summary>怎么卸载？</summary>
+        <p>删掉解压出来的那个文件夹，再删 <code>%APPDATA%\工作台\</code> 这个数据文件夹。没有注册表项、没有后台服务。</p>
+      </details>
+
+      <details>
+        <summary>开源吗？什么协议？</summary>
+        <p>MIT。源码在 GitHub 上，可以自由使用、修改、商用，保留版权声明即可。</p>
+        <p>词库和真题数据不随仓库分发——那部分版权不属于我，仓库里只放 3 条示例数据。想自己构建完整版，需要自备词库。</p>
+      </details>
+
+      <details>
+        <summary>有 Mac 或 Linux 版吗？</summary>
+        <p>没有。桌面端只打包了 Windows x64，手机端是网页，任何系统的浏览器都能开。</p>
+      </details>
+
+      <details>
+        <summary>发现问题怎么反馈？</summary>
+        <p>去 GitHub 提 Issue。附上系统版本和复现步骤，比只说「用不了」有用得多。</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ S13 页脚 ============ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <img src="assets/img/mark.svg" alt="" width="24" height="24">
+        <div>
+          <b>工作台</b>
+          <span>一个人写的，<span data-year>2026</span></span>
+        </div>
+      </div>
+
+      <nav class="footer__links" aria-label="页脚导航">
+        <a href="#" data-fill="repo">源码</a>
+        <a href="#" data-fill="issues">Issues</a>
+        <a href="#download">下载</a>
+        <a href="#faq">常见问题</a>
+        <a href="#" data-fill="license">MIT 协议</a>
+      </nav>
+    </div>
+
+    <div class="footer__bottom">
+      <span>© <span data-year>2026</span> 工作台 · MIT License</span>
+      <span>本站不含任何第三方词库或真题内容。界面使用系统字体，未嵌入字体文件。</span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/config.js"></script>
+<script src="assets/js/site.js"></script>
+</body>
+</html>

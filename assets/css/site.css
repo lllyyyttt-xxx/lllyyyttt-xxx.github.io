@@ -1,0 +1,899 @@
+/* =============================================================================
+   页面层：按屏排列，每屏一个注释块
+   ============================================================================= */
+
+/* ---------- S0 顶部导航 ---------- */
+
+.nav {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 50;
+  height: var(--nav-h);
+  background: color-mix(in srgb, var(--bg) 92%, transparent);
+  border-bottom: 1px solid transparent;
+  transition: border-color var(--dur-fast) var(--ease), background var(--dur-fast) var(--ease);
+  -webkit-backdrop-filter: saturate(180%) blur(12px);
+  backdrop-filter: saturate(180%) blur(12px);
+}
+
+.nav.is-scrolled {
+  border-bottom-color: var(--line);
+  background: color-mix(in srgb, var(--bg) 96%, transparent);
+}
+
+.nav__inner {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-5);
+  height: 100%;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-3);
+  color: var(--ink);
+  font-weight: 700;
+  letter-spacing: -.01em;
+}
+.brand:hover { color: var(--ink); }
+.brand img { width: 28px; height: 28px; border-radius: 8px; }
+.brand small {
+  color: var(--ink-3);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: .04em;
+}
+
+.nav__links {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-5);
+  margin-left: auto;
+}
+
+.nav__links a {
+  color: var(--ink-2);
+  font-size: var(--fs-sm);
+  font-weight: 500;
+}
+.nav__links a:hover { color: var(--brand-700); }
+
+.nav__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  margin-left: auto;
+}
+.nav__links + .nav__actions { margin-left: 0; }
+
+.nav__gh {
+  color: var(--ink-2);
+  font-size: var(--fs-sm);
+  font-weight: 500;
+}
+
+.nav__toggle {
+  display: none;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-md);
+  background: var(--surface);
+  cursor: pointer;
+}
+.nav__toggle span,
+.nav__toggle span::before,
+.nav__toggle span::after {
+  display: block;
+  width: 16px;
+  height: 1.5px;
+  margin: 0 auto;
+  background: var(--ink);
+  content: "";
+}
+.nav__toggle span { position: relative; }
+.nav__toggle span::before { position: absolute; top: -5px; }
+.nav__toggle span::after { position: absolute; top: 5px; }
+
+.drawer {
+  position: fixed;
+  inset: var(--nav-h) 0 auto;
+  z-index: 49;
+  padding: var(--sp-4) var(--gutter) var(--sp-6);
+  border-bottom: 1px solid var(--line);
+  background: var(--bg);
+  box-shadow: var(--shadow-2);
+}
+.drawer[hidden] { display: none; }
+.drawer a {
+  display: block;
+  padding: var(--sp-3) 0;
+  border-bottom: 1px solid var(--line);
+  color: var(--ink);
+  font-size: var(--fs-body);
+  font-weight: 500;
+}
+.drawer .btn { margin-top: var(--sp-4); }
+
+/* ---------- S1 Hero ---------- */
+
+.hero {
+  padding-top: calc(var(--nav-h) + clamp(48px, 7vw, 88px));
+  padding-bottom: clamp(48px, 7vw, 96px);
+  overflow: hidden;
+}
+
+.hero__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 6fr) minmax(0, 6fr);
+  gap: clamp(32px, 4vw, 56px);
+  align-items: center;
+}
+
+.hero h1 { max-width: none; }
+
+.hero__sub {
+  max-width: 34em;
+  margin-top: var(--sp-5);
+  font-size: var(--fs-lead);
+  line-height: 1.65;
+  color: var(--ink-3);
+  text-wrap: pretty;
+}
+
+.hero__cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-3);
+  margin-top: var(--sp-6);
+}
+
+.hero__cta-note {
+  margin-top: var(--sp-3);
+  color: var(--ink-3);
+  font-size: var(--fs-xs);
+}
+
+.hero__meta {  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--sp-2) var(--sp-4);
+  margin-top: var(--sp-5);
+  color: var(--ink-3);
+  font-size: var(--fs-xs);
+}
+.hero__meta span { display: inline-flex; align-items: center; gap: 6px; }
+.hero__meta span + span::before {
+  width: 3px; height: 3px;
+  margin-right: var(--sp-2);
+  border-radius: 50%;
+  background: var(--line-strong);
+  content: "";
+}
+
+.hero__visual { position: relative; }
+
+/* 浏览器/应用窗口外框 */
+.window {
+  position: relative;
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  background: var(--surface);
+  box-shadow: var(--shadow-2);
+  overflow: hidden;
+}
+
+.window__bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 32px;
+  padding: 0 var(--sp-3);
+  border-bottom: 1px solid var(--line);
+  background: var(--bg-soft);
+}
+.window__bar i {
+  width: 9px; height: 9px;
+  border-radius: 50%;
+  background: var(--line-strong);
+}
+.window__title {
+  margin-left: var(--sp-2);
+  color: var(--ink-3);
+  font-size: 11px;
+}
+
+.window img { width: 100%; }
+
+/* 切换器放在截图上方，不进绝对定位。
+   原来浮在右上角，切到手机端时手机外壳顶到容器右沿，
+   12px 的右间距吃不下 128px 宽的胶囊，直接压在黑色外框上。
+   放进常规流以后，两个面板怎么换都不会打架。 */
+.hero__switch {
+  display: flex;
+  width: fit-content;
+  margin: 0 auto var(--sp-3);
+  padding: 3px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-pill);
+  background: var(--surface);
+}
+.hero__switch button {
+  padding: 5px 12px;
+  border: 0;
+  border-radius: var(--r-pill);
+  background: transparent;
+  color: var(--ink-3);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.hero__switch button[aria-selected="true"] {
+  background: var(--brand-500);
+  color: var(--on-brand);
+}
+
+/* 手机外框 */
+.phone {
+  width: min(260px, 72%);
+  margin: 0 auto;
+  padding: 8px;
+  border: 1px solid var(--line-strong);
+  border-radius: 30px;
+  background: var(--ink);
+  box-shadow: var(--shadow-2);
+}
+.phone img {
+  display: block;
+  width: 100%;
+  border-radius: 23px;
+}
+
+/* ---------- S2 数字条 ---------- */
+
+.stats { padding: var(--sp-7) 0; background: var(--bg-soft); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+
+.stats__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--sp-5);
+}
+
+.stat { text-align: center; }
+.stat b {
+  display: block;
+  color: var(--ink);
+  font-size: var(--fs-num);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -.02em;
+  line-height: 1.2;
+}
+.stat span {
+  display: block;
+  margin-top: 2px;
+  color: var(--ink-3);
+  font-size: var(--fs-sm);
+}
+
+/* ---------- S3 模块总览 ---------- */
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: var(--sp-4);
+}
+
+.feature { grid-column: span 2; }
+.feature:nth-child(4),
+.feature:nth-child(5) { grid-column: span 3; }
+
+.feature {
+  display: flex;
+  flex-direction: column;
+  padding: var(--sp-5);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  background: var(--surface);
+  transition: border-color var(--dur-fast) var(--ease),
+              box-shadow var(--dur-fast) var(--ease),
+              transform var(--dur-fast) var(--ease);
+}
+.feature:hover {
+  border-color: var(--brand-200);
+  box-shadow: var(--shadow-1);
+  transform: translateY(-2px);
+}
+
+.feature__top {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  margin-bottom: var(--sp-4);
+}
+
+.feature__icon {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--r-md);
+  color: var(--on-brand);
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.feature h3 { font-size: 1.0625rem; }
+
+.feature__desc {
+  margin-bottom: var(--sp-3);
+  color: var(--ink-3);
+  font-size: var(--fs-sm);
+  line-height: 1.6;
+}
+
+.feature ul { display: grid; gap: 6px; }
+.feature li {
+  position: relative;
+  padding-left: 14px;
+  color: var(--ink-2);
+  font-size: var(--fs-sm);
+  line-height: 1.6;
+  word-break: keep-all;
+}
+.feature li::before {
+  position: absolute;
+  top: .62em;
+  left: 0;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--brand-300);
+  content: "";
+}
+
+.features__note {
+  margin-top: var(--sp-5);
+  color: var(--ink-3);
+  font-size: var(--fs-xs);
+  text-align: center;
+}
+
+/* ---------- S4–S6 深挖（左文右图） ---------- */
+
+.deep {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: clamp(32px, 5vw, 64px);
+  align-items: center;
+}
+
+.deep + .deep { margin-top: clamp(56px, 7vw, 96px); }
+
+.deep--flip { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); }
+.deep--flip .deep__text { order: 2; }
+.deep--flip .deep__visual { order: 1; }
+
+.deep h2 { max-width: 14em; }
+
+.deep__sub {
+  margin-top: var(--sp-4);
+  color: var(--ink-3);
+  font-size: var(--fs-lead);
+  line-height: 1.65;
+}
+
+.deep__list {
+  display: grid;
+  gap: var(--sp-3);
+  margin-top: var(--sp-5);
+}
+.deep__list li {
+  position: relative;
+  padding-left: 22px;
+  color: var(--ink-2);
+  font-size: var(--fs-sm);
+  line-height: 1.65;
+  /* 默认中文在任意字间断行，「三线看/板」「学习/花/销」都会被劈开。
+     keep-all 只在空格和标点处断，词就完整了。 */
+  word-break: keep-all;
+}
+.deep__list li::before {
+  position: absolute;
+  top: .55em;
+  left: 0;
+  width: 12px;
+  height: 12px;
+  border: 1.5px solid var(--brand-300);
+  border-radius: 50%;
+  content: "";
+}
+.deep__list li::after {
+  position: absolute;
+  top: calc(.55em + 3.5px);
+  left: 3.5px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--brand-500);
+  content: "";
+}
+
+/* 模块内部功能清单：左边一个词，右边一句解释。
+   原来的圆点列表只报菜名（「课表：周条视图、连堂跨格」），
+   新用户看不出这一块到底能干什么，所以改成一行一件事的写法。 */
+.mod-list {
+  margin-top: var(--sp-5);
+  border-top: 1px solid var(--line);
+}
+.mod-list li {
+  display: grid;
+  grid-template-columns: 4.6em minmax(0, 1fr);
+  gap: var(--sp-3);
+  padding: 10px 0;
+  border-bottom: 1px solid var(--line);
+  color: var(--ink-3);
+  font-size: var(--fs-sm);
+  line-height: 1.7;
+  /* 这里是成句的解释，不是名词短语：按正常中文断行，
+     只在长英文串（%APPDATA%）放不下时兜底断开 */
+  overflow-wrap: anywhere;
+}
+.mod-list li:last-child { border-bottom: 0; }
+.mod-list b {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+/* 截图说明：图和旁边那段话各说各的时，拿一行小字把它们拴上 */
+.shot__cap {
+  margin-top: var(--sp-3);
+  color: var(--ink-3);
+  font-size: var(--fs-xs);
+  line-height: 1.65;
+  text-align: center;
+}
+
+/* 合规说明（词库不随仓库发）藏在页脚边上没人看，也不该藏。
+   做成一条低饱和的注记条：不抢正文，但一眼能认出是「另有说明」。 */
+.deep__foot {
+  margin-top: var(--sp-5);
+  padding: var(--sp-3) var(--sp-4);
+  border-left: 2px solid var(--brand-200);
+  border-radius: 0 var(--r-sm) var(--r-sm) 0;
+  background: var(--bg-soft);
+  color: var(--ink-3);
+  font-size: var(--fs-xs);
+  line-height: 1.65;
+}
+.deep__foot code {
+  padding: 1px 5px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: var(--bg-soft);
+  font-size: 11px;
+}
+
+.shot {
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  background: var(--surface);
+  box-shadow: var(--shadow-2);
+  overflow: hidden;
+}
+.shot img { width: 100%; }
+
+/* 随机挑战：截图本身是横的一条，塞进 7fr 栏里字全糊了，这里改成整幅铺开 */
+.band__shot,
+.band__list { max-width: 1000px; margin-left: auto; margin-right: auto; }
+.band__shot { margin-top: var(--sp-8); }
+.band__list {
+  margin-top: var(--sp-6);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: var(--sp-7);
+}
+@media (max-width: 759px) {
+  .band__shot { margin-top: var(--sp-6); }
+  .band__list { grid-template-columns: 1fr; }
+}
+
+/* 工具清单卡：替掉 AI 区块的截图 */
+.toolbox {
+  padding: var(--sp-5);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  background: var(--surface);
+  box-shadow: var(--shadow-2);
+}
+
+.toolbox__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--sp-3);
+  padding-bottom: var(--sp-4);
+  border-bottom: 1px solid var(--line);
+}
+.toolbox__head b { color: var(--ink); font-size: var(--fs-body); }
+.toolbox__head span { color: var(--ink-3); font-size: var(--fs-xs); }
+
+.toolbox__list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 var(--sp-5);
+  margin-top: var(--sp-3);
+}
+.toolbox__list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-3);
+  padding: 9px 0;
+  border-bottom: 1px dashed var(--line);
+  color: var(--ink-2);
+  font-size: var(--fs-sm);
+}
+.toolbox__list b {
+  color: var(--brand-700);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+.toolbox__note {
+  margin-top: var(--sp-4);
+  color: var(--ink-3);
+  font-size: var(--fs-xs);
+  line-height: 1.6;
+}
+
+/* ---------- S7 AI ---------- */
+
+.ai-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--sp-3);
+  margin-top: var(--sp-6);
+}
+
+.ai-item {
+  padding: var(--sp-4);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  background: var(--surface);
+}
+.ai-item b { display: block; margin-bottom: 2px; color: var(--ink); font-size: var(--fs-sm); }
+.ai-item span { color: var(--ink-3); font-size: var(--fs-xs); line-height: 1.55; }
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2);
+  margin-top: var(--sp-5);
+}
+.chips button {
+  padding: 7px 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-pill);
+  background: var(--bg-soft);
+  color: var(--ink-2);
+  font-size: var(--fs-xs);
+  cursor: pointer;
+  transition: border-color var(--dur-fast) var(--ease), background var(--dur-fast) var(--ease);
+}
+.chips button:hover { border-color: var(--brand-300); background: var(--brand-50); }
+.chips button.is-done { border-color: var(--brand-300); background: var(--brand-50); color: var(--brand-700); }
+
+.ai-note {
+  margin-top: var(--sp-4);
+  color: var(--ink-3);
+  font-size: var(--fs-xs);
+}
+
+/* AI 区的两条补充说明：为什么不用填 key、体验里为什么关 */
+.ai-fineprint {
+  margin-top: var(--sp-3);
+  color: var(--ink-3);
+  font-size: var(--fs-xs);
+  line-height: 1.7;
+  text-wrap: pretty;
+}
+.ai-fineprint b { color: var(--ink-2); font-weight: 600; }
+
+/* ---------- S8 同步 ---------- */
+
+.sync {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  gap: clamp(32px, 5vw, 64px);
+  align-items: center;
+}
+
+.steps {
+  display: grid;
+  gap: var(--sp-4);
+  margin-top: var(--sp-5);
+  counter-reset: step;
+}
+.steps li {
+  position: relative;
+  padding-left: 38px;
+  color: var(--ink-2);
+  font-size: var(--fs-sm);
+  line-height: 1.65;
+  counter-increment: step;
+}
+.steps li::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border: 1px solid var(--brand-200);
+  border-radius: 50%;
+  background: var(--brand-50);
+  color: var(--brand-700);
+  font-size: 12px;
+  font-weight: 700;
+  content: counter(step);
+}
+.steps b { color: var(--ink); font-weight: 600; }
+
+/* ---------- S9 下载 ---------- */
+
+.dl-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--sp-4);
+  /* 两卡内容长短差不少，让它们等高、各自把最后的按钮 / 脚注推到卡底，
+     底边才对得齐。 */
+  align-items: stretch;
+}
+
+.dl-card {
+  display: flex;
+  flex-direction: column;
+  padding: var(--sp-5);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  background: var(--surface);
+  box-shadow: var(--shadow-1);
+}
+/* 贴底用 auto 顶开，但 auto 在空间不够时会退化成 0，
+   所以间距必须靠 padding 兜住，否则按钮会糊到上一段文字上。 */
+.dl-card > .dl-note:last-child { margin-top: auto; }
+.dl-card--main { border-color: var(--brand-200); }
+
+.dl-card__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-3);
+  margin-bottom: var(--sp-4);
+}
+.dl-card h3 { font-size: 1.0625rem; }
+.dl-card__ver {
+  color: var(--ink-3);
+  font-size: var(--fs-xs);
+  font-variant-numeric: tabular-nums;
+}
+
+.dl-list {
+  display: grid;
+  gap: 0;
+  margin: var(--sp-5) 0 0;
+  border-top: 1px solid var(--line);
+  font-size: var(--fs-sm);
+}
+.dl-list div {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--sp-4);
+  padding: 9px 0;
+  border-bottom: 1px solid var(--line);
+}
+.dl-list dt { color: var(--ink-3); }
+.dl-list dd {
+  margin: 0;
+  color: var(--ink);
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+.dl-list dd button {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--brand-700);
+  font-size: var(--fs-xs);
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.dl-note {
+  margin-top: var(--sp-4);
+  color: var(--ink-3);
+  font-size: var(--fs-xs);
+  line-height: 1.6;
+}
+
+.dl-pending {
+  display: none;
+  margin-top: var(--sp-4);
+  padding: var(--sp-3) var(--sp-4);
+  border: 1px solid var(--brand-200);
+  border-radius: var(--r-md);
+  background: var(--warn-bg);
+  color: var(--warn);
+  font-size: var(--fs-xs);
+  line-height: 1.6;
+}
+.dl-pending.is-on { display: block; }
+
+.dl-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-3);
+  margin-top: auto;
+  padding-top: var(--sp-5);
+}
+
+.dl-url {
+  display: block;
+  margin-top: var(--sp-3);
+  padding: var(--sp-3);
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  background: var(--bg-soft);
+  color: var(--ink-2);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  overflow-wrap: anywhere;
+}
+
+/* ---------- S10 FAQ ---------- */
+
+.faq { max-width: 760px; margin: 0 auto; }
+
+.faq details {
+  border-bottom: 1px solid var(--line);
+}
+.faq summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-4);
+  padding: var(--sp-4) 0;
+  color: var(--ink-2);
+  font-size: var(--fs-body);
+  font-weight: 500;
+  cursor: pointer;
+  list-style: none;
+}
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after {
+  flex: none;
+  color: var(--ink-3);
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1;
+  content: "+";
+}
+.faq details[open] summary { color: var(--ink); }
+.faq details[open] summary::after { content: "−"; }
+.faq details p {
+  padding-bottom: var(--sp-4);
+  color: var(--ink-3);
+  font-size: var(--fs-sm);
+  line-height: 1.7;
+}
+.faq details p + p { margin-top: calc(-1 * var(--sp-2)); padding-top: 0; }
+
+/* ---------- S11 页脚 ---------- */
+
+.footer {
+  padding: var(--sp-8) 0 var(--sp-6);
+  border-top: 1px solid var(--line);
+  background: var(--bg-soft);
+}
+
+.footer__grid {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--sp-6);
+  flex-wrap: wrap;
+}
+
+.footer__brand { display: flex; align-items: center; gap: var(--sp-3); }
+.footer__brand img { width: 24px; height: 24px; border-radius: 7px; }
+.footer__brand b { display: block; color: var(--ink); font-size: var(--fs-sm); }
+.footer__brand span { color: var(--ink-3); font-size: var(--fs-xs); }
+
+.footer__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-5);
+  font-size: var(--fs-sm);
+}
+.footer__links a { color: var(--ink-2); }
+
+.footer__bottom {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--sp-4);
+  flex-wrap: wrap;
+  margin-top: var(--sp-7);
+  padding-top: var(--sp-4);
+  border-top: 1px solid var(--line);
+  color: var(--ink-3);
+  font-size: 11px;
+  line-height: 1.7;
+}
+
+/* ---------- 响应式 ---------- */
+
+@media (max-width: 1079px) {
+  .nav__links { display: none; }
+  .nav__gh { display: none; }
+
+  .hero__grid { grid-template-columns: 1fr; }
+  .hero__visual { order: -1; }
+  .hero h1 { max-width: none; }
+  .hero__sub { max-width: 40em; }
+
+  .feature-grid { grid-template-columns: repeat(2, 1fr); }
+  .feature,
+  .feature:nth-child(4),
+  .feature:nth-child(5) { grid-column: auto; }
+
+  .deep,
+  .deep--flip,
+  .sync { grid-template-columns: 1fr; }
+  .deep__visual,
+  .deep--flip .deep__text,
+  .deep--flip .deep__visual { order: initial; }
+
+  .dl-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 759px) {
+  .nav__actions .btn { display: none; }
+  .nav__toggle { display: block; }
+
+  .hero { padding-top: calc(var(--nav-h) + 40px); }
+  .hero__cta .btn { flex: 1 1 100%; }
+  .hero__meta { font-size: 12px; }
+
+  .stats__grid { grid-template-columns: repeat(2, 1fr); gap: var(--sp-4); }
+  .stat b { font-size: 1.5rem; }
+
+  .feature-grid { grid-template-columns: 1fr; }
+
+  /* 小卡只有标题 + 一行说明，拉成通栏会空得很难看，两列更紧凑 */
+  .toolbox__list { grid-template-columns: 1fr; }
+
+  .window__bar { height: 26px; }
+  .phone { width: 240px; }
+
+  .section-head { margin-bottom: var(--sp-6); }
+  .deep__sub { font-size: var(--fs-body); }
+
+  .mod-list li { grid-template-columns: 4em minmax(0, 1fr); gap: var(--sp-2); padding: 9px 0; }
+
+  .footer__grid { flex-direction: column; gap: var(--sp-5); }
+  .footer__bottom { flex-direction: column; gap: var(--sp-2); }
+}
+
+@media (max-width: 420px) {
+  .feature { padding: var(--sp-4); }
+  .dl-card { padding: var(--sp-4); }
+}
+
+/* 320–360 这种超窄屏两列塞不下「单双周、教室都能对上」，退回单列 */
+@media (max-width: 359px) {
+  .ai-grid { grid-template-columns: 1fr; }
+}
