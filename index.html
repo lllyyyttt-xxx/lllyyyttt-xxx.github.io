@@ -113,7 +113,7 @@
 <section class="stats" aria-label="项目规模">
   <div class="container stats__grid">
     <div class="stat" data-reveal><b>6,662</b><span>四六级单词</span></div>
-    <div class="stat" data-reveal style="--i:1"><b>158</b><span>篇真题阅读</span></div>
+    <div class="stat" data-reveal style="--i:1"><b>158</b><span>篇阅读文章</span></div>
     <div class="stat" data-reveal style="--i:2"><b>39</b><span>个 AI 工具</span></div>
     <div class="stat" data-reveal style="--i:3"><b>5</b><span>个模块</span></div>
   </div>
@@ -133,9 +133,9 @@
           <span class="feature__icon" style="background:#00897b" aria-hidden="true">英</span>
           <h3>英语工作台</h3>
         </div>
-        <p class="feature__desc">6662 个词、158 篇真题、卡片背词</p>
+        <p class="feature__desc">6662 个词、158 篇阅读、卡片背词</p>
         <ul>
-          <li>每个词都标着「真题出现 N 处」和考过的套次</li>
+          <li>每个词都标着「文中出现 N 处」和出处</li>
           <li>背词按间隔排复习，认得的越隔越久，不认得的回头再来</li>
           <li>单词本按全部、四级、六级、顽固词筛选，能导出导入</li>
         </ul>
@@ -203,23 +203,23 @@
   <div class="container">
     <div class="deep">
       <div class="deep__text" data-reveal>
-        <h2>每个词都带着<br>它在真题里的出处</h2>
-        <p class="deep__sub">进去是四个页签：查词、背词、单词本、读文章。四个共用同一份词库——四级 4544 个、六级 2118 个，每个词都标着在 158 篇真题里出现过几次。</p>
+        <h2>每个词都带着<br>它在文章里的出处</h2>
+        <p class="deep__sub">进去是四个页签：查词、背词、单词本、读文章。四个共用同一份词库——四级 4544 个、六级 2118 个，每个词都标着在 158 篇阅读里出现过几次。</p>
         <ul class="mod-list">
-          <li><b>查词</b><span>输入一个词，右边出音标、词性、释义和词频；往下是真题原句，标着出自哪一年哪一套。左边是每日推荐词，顶上还有一句每日名言。</span></li>
+          <li><b>查词</b><span>输入一个词，右边出音标、词性、释义和词频；往下是原文原句，标着出自哪一篇。左边是每日推荐词，顶上还有一句每日名言。</span></li>
           <li><b>背词</b><span>一轮 20 个：先补反复答错的，再补今天该复习的，最后用没背过的新词凑满。卡片正面是词，点一下翻释义和例句。</span></li>
           <li><b>复习</b><span>点「认识」，下次间隔往后推一档（1、2、4、7、15、30、60、120 天）；点「不认识」就从第一档重来。答错三次还没背熟的，进「顽固词」。</span></li>
           <li><b>单词本</b><span>全部 / 四级 / 六级 / 顽固词四种筛法；能导出成一份文件带走，换台机器导入就接上。</span></li>
-          <li><b>读文章</b><span>158 篇真题原文，里面的四六级词自动点亮，点一下看释义；读完一键把本篇生词收进单词本。</span></li>
+          <li><b>读文章</b><span>158 篇英文原文，里面的四六级词自动点亮，点一下看释义；读完一键把本篇生词收进单词本。</span></li>
         </ul>
-        <p class="deep__foot">词库和真题不随开源仓库分发，仓库里只有 3 条示例数据。</p>
+        <p class="deep__foot">开源仓库里的词库来自 ECDICT（MIT 许可），文章是 6 篇原创示例；发行版内置 6662 词与 158 篇阅读。</p>
       </div>
       <div class="deep__visual" data-reveal style="--i:1">
         <div class="shot">
           <img src="assets/img/shot-english.webp" width="1200" height="900" loading="lazy" decoding="async"
-               alt="英语工作台的查词页：左边是每日推荐和单词列表，右边是 technology 的音标、释义、真题用法，下面列出三条带出处的真题原句，词被高亮">
+               alt="英语工作台的查词页：左边是每日推荐和单词列表，右边是 technology 的音标、释义、文中用法，下面列出三条带出处的原文原句，词被高亮">
         </div>
-        <p class="shot__cap">英语 · 查词：右边是释义、词频，和它在真题里的原句。</p>
+        <p class="shot__cap">英语 · 查词：右边是释义、词频，和它在文中的原句。</p>
       </div>
     </div>
   </div>
@@ -339,7 +339,7 @@
           <div class="ai-item"><b>查课表 / 加课</b><span>「明天 3-4 节加门课」直接写进课表</span></div>
           <div class="ai-item"><b>记账 / 查花费</b><span>「午饭 18」记下；「这月花了多少」自己算</span></div>
           <div class="ai-item"><b>加待办 / 建倒计时</b><span>带上截止日期和重复方式</span></div>
-          <div class="ai-item"><b>查词 / 周复盘</b><span>四六级词义、真题出处，这周学了多久</span></div>
+          <div class="ai-item"><b>查词 / 周复盘</b><span>四六级词义、文中出处，这周学了多久</span></div>
         </div>
 
         <div class="chips" aria-label="示例问句，点击可复制">
@@ -523,7 +523,7 @@
       <details>
         <summary>开源吗？什么协议？</summary>
         <p>MIT。源码在 GitHub 上，可以自由使用、修改、商用，保留版权声明即可。</p>
-        <p>词库和真题数据不随仓库分发——那部分版权不属于我，仓库里只放 3 条示例数据。想自己构建完整版，需要自备词库。</p>
+        <p>仓库里的词库来自 ECDICT（MIT 许可），可以直接替换成自己的。发行版内置的完整词表与 158 篇阅读不随仓库分发，需要自备数据。</p>
       </details>
 
       <details>
@@ -564,7 +564,7 @@
 
     <div class="footer__bottom">
       <span>© <span data-year>2026</span> 工作台 · MIT License</span>
-      <span>本站不含任何第三方词库或真题内容。界面使用系统字体，未嵌入字体文件。</span>
+      <span>本站不提供词库数据下载；开源仓库使用的词库来自 ECDICT（MIT 许可）。界面使用系统字体，未嵌入字体文件。</span>
     </div>
   </div>
 </footer>
